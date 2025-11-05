@@ -148,6 +148,10 @@
 
     .bio { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
     .speaker:hover .bio { max-height: 240px; }
+    
+    @media (hover: none) and (pointer: coarse) {
+      .bio { max-height: none; }
+    }
 
     .card {
       background: var(--card);
