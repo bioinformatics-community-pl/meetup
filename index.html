@@ -12,8 +12,8 @@
 
   <style>
     :root {
-      --bg1: #3E206D;
-      --bg2: #A6F68F;
+      --bg1: #3E206D;           /* dark violet (top) */
+      --bg2: #A6F68F;           /* green (bottom) */
       --card: rgba(20, 30, 60, 0.85);
       --txt: #ffffff;
       --muted: #cdd3e8;
@@ -107,6 +107,7 @@
       background: rgba(255,255,255,0.03);
     }
     .agenda .time { font-variant-numeric: tabular-nums; color: var(--acc2); font-weight: 700; }
+    .agenda .title { color: #fff; }
 
     .agenda-break { display: flex; align-items: center; gap: 12px; margin: 10px 0; }
     .agenda-break:before, .agenda-break:after { content: ""; height: 1px; flex: 1; background: rgba(255,255,255,0.15); }
@@ -119,6 +120,7 @@
       font-weight: 700;
     }
 
+    /* Speakers */
     .speaker {
       display: grid;
       grid-template-columns: 96px minmax(0,1fr);
@@ -129,113 +131,231 @@
       border: 1px solid rgba(255,255,255,.12);
       border-radius: 14px;
       background: var(--card);
-      transition: transform .2s ease, background .25s ease;
+      transition: transform .2s ease, background .25s ease, border-color .25s ease;
     }
-    .speaker:hover { transform: translateY(-2px); }
+    .speaker:hover { transform: translateY(-2px); background: rgba(20, 30, 60, 0.95); border-color: rgba(255,255,255,.18); }
 
-    .avatar { width: 96px; height: 96px; border-radius: 12px; object-fit: cover; border: 1px solid rgba(255,255,255,.08); }
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 12px;
+      object-fit: cover;
+      background: #0b1220;
+      border: 1px solid rgba(255,255,255,.08);
+      align-self: start;
+    }
 
     .bio { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
-    .speaker:hover .bio { max-height: 200px; }
+    .speaker:hover .bio { max-height: 240px; }
+    @media (hover: none) and (pointer: coarse) { .bio { max-height: none; } }
 
-    .card { background: var(--card); border-radius: 16px; padding: 24px; border: 1px solid rgba(255,255,255,.08); }
+    .card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid rgba(255,255,255,.08);
+      width: 100%;
+    }
+
     .muted { color: var(--muted); }
+
+    .sponsor-logos img { transition: transform 0.25s ease, filter 0.25s ease; }
+    .sponsor-logos img:hover { transform: scale(1.08); filter: brightness(1.2); }
+
     a { color: var(--acc2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
     footer { text-align: center; padding: 40px 0 20px; color: var(--muted); }
   </style>
 </head>
 
 <body>
-<div class="wrap">
-<header>
-  <div class="meetup-title">Bioinformatics Community Meetup #4</div>
-  <div class="meetup-date">22 November 2025</div>
-  <div class="meetup-location">AGH Faculty of Computer Science (D-17), ul. Kawiory 21, room 1.20</div>
-  <p class="sub">Where Computational Life Science Meets People</p>
-  <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLScmwbm_tgFsqCpk8vMkr1eFlRLWz4MnGhL9_WDkr0WlrTXk4g/viewform?usp=header" target="_blank" rel="noopener">Waiting List</a>
-  <div class="muted" style="margin-top:8px;">Free entry • Limited seats</div>
-</header>
+  <div class="wrap">
+    <header>
+      <div class="meetup-title">Bioinformatics Community Meetup #4</div>
+      <div class="meetup-date">22 November 2025</div>
+      <div class="meetup-location">AGH Faculty of Computer Science (D-17), ul. Kawiory 21, room 1.20</div>
+      <p class="sub">Where Computational Life Science Meets People</p>
+      <a class="cta" href="https://docs.google.com/forms/d/e/1FAIpQLScmwbm_tgFsqCpk8vMkr1eFlRLWz4MnGhL9_WDkr0WlrTXk4g/viewform?usp=header" target="_blank" rel="noopener">Waiting List</a>
+      <div class="muted" style="margin-top:8px;">Free entry • Limited seats</div>
+    </header>
 
-<!-- AGENDA -->
-<section class="section-agenda">
-  <h2>🗓️ Agenda</h2>
-  <div class="agenda">
-    <div class="agenda-item"><div class="time">09:30</div><div>Registration &amp; Speed Networking</div></div>
-    <div class="agenda-item"><div class="time">10:00</div><div>Welcome Talk + Sponsors</div></div>
-    <div class="agenda-item"><div class="time">10:30</div><div><strong>Panel Discussion:</strong> Bioinformatics Beyond Earth – Challenges and Directions in Space Exploration</div></div>
-    <div class="agenda-item"><div class="time">11:30</div><div>Mateusz Sikora — From AI Factory to Pharma Innovation</div></div>
-    <div class="agenda-break"><span class="pill">☕ 12:00 Coffee Break</span></div>
-    <div class="agenda-item"><div class="time">12:30</div><div>Aga Rasińska — Behind the Scenes of Pharma Analytics</div></div>
-    <div class="agenda-item"><div class="time">13:00</div><div>Joanna Krawczyk — Biology in the Era of Foundational Models</div></div>
-    <div class="agenda-item"><div class="time">13:30</div><div>Marc Pielies Avellí — Deep Learning-Based Data Integration</div></div>
-    <div class="agenda-break"><span class="pill">🍕 14:00 Lunch Break + Group Photo</span></div>
-    <div class="agenda-item"><div class="time">15:00</div><div>Diego Marques Coelho — Single-cell Analysis in Sjögren’s Disease</div></div>
-    <div class="agenda-item"><div class="time">15:30</div><div>Krzysztof A. Kowal — Canis MitoSNP Tool</div></div>
-    <div class="agenda-item"><div class="time">16:00</div><div>Closing Remarks</div></div>
-    <div class="agenda-break"><span class="pill">🌍 17:00 Networking @ Kawiory Food Truck Park</span></div>
+    <!-- AGENDA -->
+    <section class="section-agenda">
+      <h2>🗓️ Agenda</h2>
+      <div class="agenda">
+        <div class="agenda-item"><div class="time">09:30</div><div class="title">Registration &amp; Speed Networking</div></div>
+        <div class="agenda-item"><div class="time">10:00</div><div class="title">Welcome Talk + Sponsors</div></div>
+        <div class="agenda-item">
+          <div class="time">10:30</div>
+          <div class="title">Panel Discussion: Bioinformatics Beyond Earth: Challenges and Directions in Space Exploration - Łukasz Szydłowski, Agata Kołodziejczyk, Daniela Bezdan, Krystian Komenda</div>
+        </div>
+        <div class="agenda-item">
+          <div class="time">11:30</div>
+          <div class="title">Mateusz Sikora - From AI Factory to Pharma Innovation: Leveraging the Gaia AI Factory Ecosystem for High-Throughput Glycoprotein Modeling</div>
+        </div>
+        <div class="agenda-break"><span class="pill">☕ 12:00 Coffee Break</span></div>
+        <div class="agenda-item">
+          <div class="time">12:30</div>
+          <div class="title">Aga Rasińska - Behind the Scenes of Pharma Analytics: Open-Source, Data &amp; Bioinformatics</div>
+        </div>
+        <div class="agenda-item">
+          <div class="time">13:00</div>
+          <div class="title">Joanna Krawczyk - Biology in the era of Foundational Models</div>
+        </div>
+        <div class="agenda-item">
+          <div class="time">13:30</div>
+          <div class="title">Marc Pielies Avelli - Deep learning-based multimodal data integration: promises and challenges</div>
+        </div>
+        <div class="agenda-break"><span class="pill">📸🍕 14:00 Group Photo + Lunch Break</span></div>
+        <div class="agenda-item">
+          <div class="time">15:00</div>
+          <div class="title">Diego Coelho - Pathogenic mechanisms and potential drug targets uncovered by single-cell co-expression analysis in Sjögren’s Disease</div>
+        </div>
+        <div class="agenda-item">
+          <div class="time">15:30</div>
+          <div class="title">Krzysztof Kowal - Canis MitoSNP - a bioinformatic tool</div>
+        </div>
+        <div class="agenda-item"><div class="time">16:00</div><div class="title">Closing Remarks</div></div>
+        <div class="agenda-break"><span class="pill">🌍 17:00 Networking – Kawiory Street Food Park</span></div>
+      </div>
+    </section>
+
+    <!-- SPONSORS -->
+    <section class="section-sponsors">
+      <h2>Our Sponsors</h2>
+      <div class="card" style="text-align:center; background: transparent; border: none;">
+        <p>We thank our amazing sponsors for supporting the Bioinformatics Community Meetup #4.</p>
+        <div class="sponsor-logos" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:32px;margin-top:16px;">
+          <img src="assets/sponsors/bcpl-name.png" alt="Bioinformatics Community PL logo" style="height:60px;">
+          <img src="assets/sponsors/logo_podstawowe.png" alt="AGH University logo" style="height:60px;">
+          <img src="assets/sponsors/ptbi.png" alt="PTBI logo" style="height:60px;">
+          <img src="assets/sponsors/jetbrains.png" alt="JetBrains logo" style="height:60px;">
+          <img src="assets/sponsors/IMG_6206.jpeg" alt="Additional sponsor logo" style="height:60px;border-radius:8px;">
+        </div>
+      </div>
+    </section>
+
+    <!-- SPEAKERS -->
+    <section class="section-speakers">
+      <h2>Speakers</h2>
+
+      <div class="speaker">
+        <img class="avatar" src="assets/speakers/Photo.jpg" alt="Aga Rasińska headshot" />
+        <div>
+          <h3 style="margin:0 0 8px;">Aga Rasińska</h3>
+          <div class="muted">Behind the Scenes of Pharma Analytics: Open-Source, Data &amp; Bioinformatics</div>
+          <p class="bio">👩‍🔬 <strong>About the speaker:</strong> With over a decade of experience in clinical analytics, bioinformatics, and digital transformation, Aga has led cross-functional initiatives across Europe and the U.S., bringing together data scientists, biostatisticians, and bioinformaticians to build data-driven solutions. She is an active advocate for open-source in pharma and passionate about breaking down silos between teams and tools.</p>
+        </div>
+      </div>
+
+      <div class="speaker">
+        <img class="avatar" src="assets/speakers/JoannaKrawczyk_photo.jpeg" alt="Joanna Krawczyk headshot" />
+        <div>
+          <h3 style="margin:0 0 8px;">Joanna Krawczyk</h3>
+          <div class="muted">Biology in the Era of Foundational Models</div>
+          <p class="bio">👩‍🔬 <strong>About the speaker:</strong> Joanna Krawczyk holds degrees in Mathematics and Bioinformatics from the Uniwersytet Warszawski. Before joining Ingenix.ai, she worked at Ryvu Therapeutics, supporting target discovery and biomarker development through CRISPR screening. As a researcher at the Ewa Szczurek Computational Medicine Lab, she studied the tumor immune microenvironment using spatial and single-cell transcriptomics in collaboration with the IMMUcan consortium.</p>
+        </div>
+      </div>
+
+      <div class="speaker">
+        <img class="avatar" src="assets/speakers/Marc%20Pielies%20Avelli_246b.png" alt="Marc Pielies Avellí headshot" />
+        <div>
+          <h3 style="margin:0 0 8px;">Marc Pielies Avellí</h3>
+          <div class="muted">Deep Learning-Based Multimodal Data Integration: Promises and Challenges</div>
+          <p class="bio">👨‍🔬 <strong>About the speaker:</strong> Marc Pielies Avellí began his academic path in Physics at the University of Barcelona, later completing an MSc in Biophysics and Computational Biology at Lund University. Now in the final year of his PhD at the University of Copenhagen, in collaboration with the Broad Institute of MIT and Harvard.</p>
+        </div>
+      </div>
+
+      <!-- MATEUSZ SIKORA (full, dopasowany) -->
+      <div class="speaker">
+        <img class="avatar" src="assets/speakers/IMG_5512obrobione%20ab.jpg" alt="Mateusz Sikora headshot" />
+        <div>
+          <h3 style="margin:0 0 8px;">Mateusz Sikora</h3>
+          <div class="muted">From AI Factory to Pharma Innovation: Leveraging the Gaia AI Factory Ecosystem for High-Throughput Glycoprotein Modeling</div>
+          <p class="bio"><strong>About the talk:</strong> Mateusz pokaże, jak AI i HPC pomagają modelować glikoproteiny — obszar zwykle pomijany w klasycznych pipeline’ach. Zespół rozwinął platformę <em>GlycoSHIELD</em>, zintegrowaną z Gaia AI Factory w ACC Cyfronet AGH, do skalowalnego modelowania pokrycia i elastyczności glikanów na powierzchniach białek.<br/><br/>
+            👨‍🔬 <strong>About the speaker:</strong> Head of the <em>#Dioscuri Centre for Modelling of Posttranslational Modifications</em> w Małopolskim Centrum Biotechnologii UJ. Wcześniej postdoc w MPI for Biophysics (Frankfurt) i na IST Austria; doktorat w IF PAN. Specjalizuje się w symulacjach molekularnych i AI w biologii.
+          </p>
+        </div>
+      </div>
+
+      <!-- DIEGO MARQUES COELHO (full, dopasowany) -->
+      <div class="speaker">
+        <img class="avatar" src="assets/speakers/diego_image.jpeg" alt="Diego Marques Coelho headshot" />
+        <div>
+          <h3 style="margin:0 0 8px;">Diego Marques Coelho</h3>
+          <div class="muted">Pathogenic mechanisms and potential drug targets uncovered by single-cell co-expression analysis in Sjögren’s Disease</div>
+          <p class="bio"><strong>About the talk:</strong> Praca wykorzystuje <em>hdWGCNA</em> (~160k komórek, 49 pacjentów) do identyfikacji modułów chorobowych w monocytach, plazmocytach i komórkach śródbłonka; weryfikuje m.in. FCGRT (FcRn), SYK, IL7R i wskazuje interakcje NF-κB/BCR jako potencjalne kierunki terapeutyczne.<br/><br/>
+            👨‍🔬 <strong>About the speaker:</strong> Associate Director w Ryvu Therapeutics i Visiting Professor w UFRN. Doświadczenie w Mendelics i EMBL-EBI (VEP). Zajmuje się transkryptomiką jedno- i wielkokomórkową w autoimmunologii i neurobiologii.
+          </p>
+        </div>
+      </div>
+
+      <!-- KRZYSZTOF A. KOWAL (full, dopasowany) -->
+      <div class="speaker">
+        <img class="avatar" src="assets/speakers/Krzysztof Kowal.jpg" alt="Krzysztof A. Kowal headshot" />
+        <div>
+          <h3 style="margin:0 0 8px;">Krzysztof A. Kowal</h3>
+          <div class="muted">Canis MitoSNP - A Bioinformatic Tool</div>
+          <p class="bio"><strong>About the talk:</strong> <em>Canis MitoSNP</em> przypisuje każdą pozycję w psim mtDNA do genu i pozycji strukturalnej (tRNA, rRNA, białka), łącząc wyniki TMHMM, SOPMA, tRNA-SCAN, RNAfold i ConSurf dla psa i człowieka. Ułatwia analizę SNP/aminokwasów/białek, ocenę synonimowości oraz porównania międzygatunkowe (Clustal W). Narzędzie zaczęło jako projekt w Excelu — pomysł ponad stackiem.<br/><br/>
+            👉 <a href="https://canismitosnp.pl" target="_blank" rel="noopener">canismitosnp.pl</a><br/><br/>
+            👨‍🔬 <strong>About the speaker:</strong> Adiunkt na Uniwersytecie Przyrodniczym w Lublinie (genomika nowotworów u psów). Absolwent biologii sądowej i biotechnologii UPL; podyplomowe z bioinformatyki (PJATK, 2025). Członek PTG (od 2020) i PTBI (od 2024), twórca programu „Bioinformatyka w bioekonomii”, stypendysta Ministra Nauki.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DISCUSSION PANEL -->
+    <section class="section-discussion">
+      <h2>🌌 Discussion Panel</h2>
+      <div class="card">
+        <p style="font-size:1.1rem;margin-bottom:20px;"><strong>Bioinformatics Beyond Earth: Challenges and Directions in Space Exploration</strong></p>
+        <p>As humanity looks toward the Moon and Mars, bioinformatics is finding its place among the stars. This panel will explore how computational biology, space biotechnology, and AI-driven life sciences are shaping the future of space missions — from understanding biological responses to microgravity, to developing sustainable food systems and next-generation space medicine.</p>
+        <p class="muted" style="margin-top:20px;"><strong>Format:</strong> 60-minute moderated discussion</p>
+
+        <div style="margin-top:24px;padding:16px;background:rgba(255,255,255,0.05);border-radius:12px;border-left:4px solid var(--acc2);">
+          <h4 style="margin:0 0 12px;color:var(--acc2);">👩‍🚀 Panel Host</h4>
+          <p style="margin:0 0 8px;"><strong>Łukasz Szydłowski</strong> — Chief Technology Officer at AstroFarms</p>
+          <p style="margin:0;font-size:0.95rem;">Łukasz is the CTO and co-founder of <a href="https://astrofarms.space/" target="_blank" rel="noopener">AstroFarms</a>, a startup engineering microbial consortia for extraterrestrial agriculture, enabling sustainable food production on the Moon and Mars. With a PhD in Biotechnology from the University of Cambridge and research experience at Wageningen University and OIST, he brings deep expertise in synthetic biology, microbial fuel cells, and microbiome research.</p>
+        </div>
+
+        <div style="margin-top:16px;padding:16px;background:rgba(255,255,255,0.05);border-radius:12px;border-left:4px solid var(--acc2);">
+          <h4 style="margin:0 0 12px;color:var(--acc2);">👨‍🚀 Panelist</h4>
+          <p style="margin:0 0 8px;"><strong>Daniela Bezdan</strong> — Space Biotech Entrepreneur, Scientist</p>
+          <p style="margin:0;font-size:0.95rem;">CEO of dxOmics GmbH, Chair &amp; Founder of ISSOP, NASA GeneLab Microbe Working Group Chair, ESA Topical Team member, ESF panelist, and XPRIZE Ambassador. Bridges genomics, AI and space science with 60 publications and 14 patents.</p>
+        </div>
+
+        <p class="muted" style="margin-top:20px;font-style:italic;">+ 2 additional panelists to be announced soon</p>
+        <p class="muted" style="margin-top:16px;">Want to suggest a question? Email us at <a href="mailto:bioinformatics.community.pl@gmail.com">bioinformatics.community.pl@gmail.com</a>.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section-faq">
+      <h2>FAQ</h2>
+      <div class="card"><strong>Is the meetup free?</strong><br/>Yes, but registration is required.</div>
+      <div class="card" style="margin-top:8px;"><strong>Do I need to be an expert in bioinformatics?</strong><br/>Not at all! The meetup is open to everyone — students, researchers, industry professionals, and anyone curious about bioinformatics.</div>
+      <div class="card" style="margin-top:8px;"><strong>Will talks be recorded?</strong><br/>We plan to share recordings with attendees after the event.</div>
+      <div class="card" style="margin-top:8px;"><strong>Language?</strong><br/>Talks will be in English, but during informal networking, all languages are welcome!</div>
+      <div class="card" style="margin-top:8px;"><strong>Is there parking available?</strong><br/>Unfortunately, there is no parking at the venue. We recommend using public transport — the best stop is "Kawiory".</div>
+      <div class="card" style="margin-top:8px;"><strong>Where will the informal networking take place?</strong><br/>The social part will be at <strong>Kawiory Food Truck Park | Kraków</strong>.</div>
+      <div class="card" style="margin-top:8px;"><strong>What should I bring?</strong><br/>Just yourself and your curiosity! A laptop is optional but might be useful for networking.</div>
+      <div class="card" style="margin-top:8px;"><strong>Can I present my work or project?</strong><br/>For this edition, the speaker lineup is complete. However, reach out if you'd like to present at future meetups!</div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section-contact">
+      <h2>Contact</h2>
+      <div class="card">
+        <div style="margin-bottom:8px;">📧 <a href="mailto:bioinformatics.community.pl@gmail.com">bioinformatics.community.pl@gmail.com</a></div>
+        <div style="margin-bottom:8px;">💼 <a href="https://www.linkedin.com/company/bioinformatics-community-pl/posts/?feedView=all" target="_blank" rel="noopener">LinkedIn: Bioinformatics Community PL</a></div>
+        <div>📷 <a href="https://www.instagram.com/bioinformatics.community.pl/" target="_blank" rel="noopener">Instagram: @bioinformatics.community.pl</a></div>
+      </div>
+    </section>
+
+    <footer>
+      © 2025 Bioinformatics Community Meetup • <a href="#privacy">Privacy</a>
+    </footer>
   </div>
-</section>
-
-<!-- SPEAKERS -->
-<section class="section-speakers">
-  <h2>Speakers</h2>
-
-  <div class="speaker">
-    <img class="avatar" src="assets/speakers/Photo.jpg" alt="Aga Rasińska" />
-    <div>
-      <h3>Aga Rasińska</h3>
-      <div class="muted">Behind the Scenes of Pharma Analytics: Open-Source, Data &amp; Bioinformatics</div>
-      <p class="bio"><strong>About the speaker:</strong> Over a decade of experience in clinical analytics and bioinformatics, leading data-driven initiatives across Europe and the U.S. Advocates open-source pharma and collaborative science.</p>
-    </div>
-  </div>
-
-  <div class="speaker">
-    <img class="avatar" src="assets/speakers/JoannaKrawczyk_photo.jpeg" alt="Joanna Krawczyk" />
-    <div>
-      <h3>Joanna Krawczyk</h3>
-      <div class="muted">Biology in the Era of Foundational Models</div>
-      <p class="bio"><strong>About the speaker:</strong> Mathematician and bioinformatician with experience at Ryvu Therapeutics and Ingenix.ai. Researches tumor microenvironments and single-cell transcriptomics in computational medicine.</p>
-    </div>
-  </div>
-
-  <div class="speaker">
-    <img class="avatar" src="assets/speakers/Marc%20Pielies%20Avelli_246b.png" alt="Marc Pielies Avellí" />
-    <div>
-      <h3>Marc Pielies Avellí</h3>
-      <div class="muted">Deep Learning-Based Multimodal Data Integration: Promises and Challenges</div>
-      <p class="bio"><strong>About the speaker:</strong> Physicist and computational biologist from the University of Barcelona and Lund University, now PhD candidate at the University of Copenhagen collaborating with the Broad Institute.</p>
-    </div>
-  </div>
-
-  <div class="speaker">
-    <img class="avatar" src="assets/speakers/IMG_5512obrobione%20ab.jpg" alt="Mateusz Sikora" />
-    <div>
-      <h3>Mateusz Sikora</h3>
-      <div class="muted">From AI Factory to Pharma Innovation: High-Throughput Glycoprotein Modeling</div>
-      <p class="bio"><strong>About the speaker:</strong> Head of the Dioscuri Centre for Modelling of Posttranslational Modifications at the Jagiellonian University. Former postdoc at MPI for Biophysics and IST Austria, specializing in molecular simulations and AI-driven biology.</p>
-    </div>
-  </div>
-
-  <div class="speaker">
-    <img class="avatar" src="assets/speakers/diego_image.jpeg" alt="Diego Marques Coelho" />
-    <div>
-      <h3>Diego Marques Coelho</h3>
-      <div class="muted">Pathogenic Mechanisms and Drug Targets in Sjögren’s Disease</div>
-      <p class="bio"><strong>About the speaker:</strong> Associate Director at Ryvu Therapeutics and Visiting Professor at UFRN. Expert in single-cell and bulk transcriptomics applied to autoimmune and neurodegenerative diseases.</p>
-    </div>
-  </div>
-
-  <div class="speaker">
-    <img class="avatar" src="assets/speakers/Krzysztof Kowal.jpg" alt="Krzysztof A. Kowal" />
-    <div>
-      <h3>Krzysztof A. Kowal</h3>
-      <div class="muted">Canis MitoSNP – A Bioinformatic Tool</div>
-      <p class="bio"><strong>About the speaker:</strong> Assistant Professor at the University of Life Sciences in Lublin specializing in cancer genomics in dogs. Creator of Canis MitoSNP and member of the Polish Genetics and Bioinformatics Societies.</p>
-    </div>
-  </div>
-</section>
-
-<!-- (discussion panel, FAQ, contact, footer stay unchanged) -->
-</div>
 </body>
 </html>
