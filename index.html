@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bioinformatics Community Meetup #4 — 22 Nov 2025, AGH D-17</title>
-  <meta name="description" content="Bioinformatics Community Meetup #4 at AGH Faculty of Computer Science (D-17). Talks, networking, and a discussion panel." />
-  <meta property="og:title" content="Bioinformatics Community Meetup #4 — 22 Nov 2025" />
-  <meta property="og:description" content="Talks, networking, and a discussion panel at AGH D-17." />
+  <title>Bioinformatics Community Meetup #5 — 11 July 2026, Kraków Miastem Startupów, Zabłocie 20</title>
+  <meta name="description" content="Bioinformatics Community Meetup #5 at Kraków Miastem Startupów, Zabłocie 20. Talks, networking, and a discussion panel." />
+  <meta property="og:title" content="Bioinformatics Community Meetup #5 — 11 July 2026" />
+  <meta property="og:description" content="Talks, networking, and a discussion panel at Kraków Miastem Startupów, Zabłocie 20." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://your-login.github.io/meetup/" />
 
@@ -165,6 +165,35 @@
     a { color: var(--acc2); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 0 0 20px;
+    }
+
+    .tab-btn {
+      border: 1px solid rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .tab-btn:hover { transform: translateY(-1px); }
+
+    .tab-btn.active {
+      background: linear-gradient(90deg, var(--acc), var(--acc2));
+      border-color: transparent;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
     footer { text-align: center; padding: 40px 0 20px; color: var(--muted); }
   </style>
 </head>
@@ -172,13 +201,31 @@
 <body>
   <div class="wrap">
     <header>
-      <div class="meetup-title">Bioinformatics Community Meetup #4</div>
-      <div class="meetup-date">22 November 2025</div>
-      <div class="meetup-location">AGH Faculty of Computer Science (D-17), ul. Kawiory 21, room 1.20</div>
+      <div class="meetup-title">Bioinformatics Community Meetup #5</div>
+      <div class="meetup-date">11 July 2026</div>
+      <div class="meetup-location">Kraków Miastem Startupów, Zabłocie 20</div>
       <p class="sub">Where Computational Life Science Meets People</p>
       <div class="cta" style="cursor:default;">Participants, please check your mailbox and confirm registration</div>
-      <div class="muted" style="margin-top:8px;">Registration closed • Limited seats</div>
+      <div class="muted" style="margin-top:8px;">Registration not open yet • Limited seats</div>
+     😉
     </header>
+
+    <nav class="tabs" aria-label="Event tabs">
+      <button type="button" class="tab-btn active" data-tab="current" aria-selected="true">Meetup #5</button>
+      <button type="button" class="tab-btn" data-tab="previous" aria-selected="false">Previous event (#4)</button>
+    </nav>
+
+    <div id="tab-current" class="tab-content active">
+      <section>
+        <h2>📍 Upcoming Meetup</h2>
+        <div class="card">
+          <p><strong>Bioinformatics Community Meetup #5</strong> takes place on <strong>11 July 2026</strong> at <strong>Kraków Miastem Startupów, Zabłocie 20</strong>.</p>
+          <p class="muted" style="margin-bottom:0;">The full program and speaker lineup will be published soon. Check back here for updates.</p>
+        </div>
+      </section>
+    </div>
+
+    <div id="tab-previous" class="tab-content">
 
     <!-- AGENDA -->
     <section class="section-agenda">
@@ -225,7 +272,7 @@
     <section class="section-sponsors">
       <h2>Our Sponsors</h2>
       <div class="card" style="text-align:center; background: transparent; border: none;">
-        <p>We thank our amazing sponsors for supporting the Bioinformatics Community Meetup #4.</p>
+        <p>We thank our amazing sponsors for supporting the Bioinformatics Community Meetup #5.</p>
         <div class="sponsor-logos" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:32px;margin-top:16px;">
           <img src="assets/sponsors/bcpl-name.png" alt="Bioinformatics Community PL logo" style="height:60px;">
           <img src="assets/sponsors/logo_podstawowe.png" alt="AGH University logo" style="height:60px;">
@@ -347,6 +394,7 @@
       <div class="card" style="margin-top:8px;"><strong>What should I bring?</strong><br/>Just yourself and your curiosity! A laptop is optional but might be useful for networking.</div>
       <div class="card" style="margin-top:8px;"><strong>Can I present my work or project?</strong><br/>For this edition, the speaker lineup is complete. However, reach out if you'd like to present at future meetups!</div>
     </section>
+    </div>
 
     <!-- CONTACT -->
     <section class="section-contact">
@@ -362,5 +410,42 @@
       © 2025 Bioinformatics Community Meetup • <a href="#privacy">Privacy</a>
     </footer>
   </div>
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabContents = {
+      current: document.getElementById('tab-current'),
+      previous: document.getElementById('tab-previous')
+    };
+
+    function activateTab(tabName, updateHash = false) {
+      const normalizedTab = tabContents[tabName] ? tabName : 'current';
+
+      tabButtons.forEach((btn) => {
+        const isActive = btn.dataset.tab === normalizedTab;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      Object.entries(tabContents).forEach(([name, tabElement]) => {
+        tabElement.classList.toggle('active', name === normalizedTab);
+      });
+
+      if (updateHash && window.location.hash !== `#${normalizedTab}`) {
+        window.location.hash = normalizedTab;
+      }
+    }
+
+    tabButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        activateTab(button.dataset.tab, true);
+      });
+    });
+
+    window.addEventListener('hashchange', () => {
+      activateTab(window.location.hash.replace('#', ''), false);
+    });
+
+    activateTab(window.location.hash.replace('#', ''), false);
+  </script>
 </body>
 </html>
