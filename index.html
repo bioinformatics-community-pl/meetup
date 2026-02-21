@@ -205,8 +205,8 @@
 <body>
   <div class="wrap">
     <nav class="topbar" aria-label="Event tabs">
-      <button type="button" class="tab-btn active" data-tab="current" aria-selected="true">Meetup #5</button>
-      <button type="button" class="tab-btn" data-tab="previous" aria-selected="false">Meetup #4</button>
+      <button type="button" class="tab-btn active" data-tab="meetup5" aria-selected="true">Meetup #5</button>
+      <button type="button" class="tab-btn" data-tab="meetup4" aria-selected="false">Meetup #4</button>
     </nav>
 
     <header>
@@ -219,7 +219,7 @@
      
     </header>
 
-    <div id="tab-current" class="tab-content active">
+    <div id="tab-meetup5" class="tab-content active">
       <section>
         <h2>📍 Upcoming Meetup</h2>
         <div class="card">
@@ -229,7 +229,7 @@
       </section>
     </div>
 
-    <div id="tab-previous" class="tab-content">
+    <div id="tab-meetup4" class="tab-content">
 
     <!-- AGENDA -->
     <section class="section-agenda">
@@ -417,12 +417,12 @@
   <script>
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = {
-      current: document.getElementById('tab-current'),
-      previous: document.getElementById('tab-previous')
+      meetup5: document.getElementById('tab-meetup5'),
+      meetup4: document.getElementById('tab-meetup4')
     };
 
     function activateTab(tabName, updateHash = false) {
-      const normalizedTab = tabContents[tabName] ? tabName : 'current';
+      const normalizedTab = tabContents[tabName] ? tabName : 'meetup5';
 
       tabButtons.forEach((btn) => {
         const isActive = btn.dataset.tab === normalizedTab;
