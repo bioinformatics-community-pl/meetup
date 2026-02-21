@@ -165,11 +165,15 @@
     a { color: var(--acc2); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    .tabs {
+    .topbar {
       display: flex;
       justify-content: center;
       gap: 10px;
       flex-wrap: wrap;
+      background: rgba(0,0,0,0.18);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 10px;
       margin: 0 0 20px;
     }
 
@@ -200,20 +204,20 @@
 
 <body>
   <div class="wrap">
+    <nav class="topbar" aria-label="Event tabs">
+      <button type="button" class="tab-btn active" data-tab="current" aria-selected="true">Meetup #5</button>
+      <button type="button" class="tab-btn" data-tab="previous" aria-selected="false">Meetup #4</button>
+    </nav>
+
     <header>
       <div class="meetup-title">Bioinformatics Community Meetup #5</div>
       <div class="meetup-date">11 July 2026</div>
       <div class="meetup-location">Kraków Miastem Startupów, Zabłocie 20</div>
       <p class="sub">Where Computational Life Science Meets People</p>
-      <div class="cta" style="cursor:default;">Participants, please check your mailbox and confirm registration</div>
-      <div class="muted" style="margin-top:8px;">Registration not open yet • Limited seats</div>
-     😉
+      <div class="cta" style="cursor:default;">Registration to be announced</div>
+      <div class="muted" style="margin-top:8px;">Registration not open yet - stay tuned 😉• Limited seats</div>
+     
     </header>
-
-    <nav class="tabs" aria-label="Event tabs">
-      <button type="button" class="tab-btn active" data-tab="current" aria-selected="true">Meetup #5</button>
-      <button type="button" class="tab-btn" data-tab="previous" aria-selected="false">Previous event (#4)</button>
-    </nav>
 
     <div id="tab-current" class="tab-content active">
       <section>
