@@ -198,6 +198,51 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
+    .highlight-list {
+      margin: 0;
+      padding-left: 20px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .review-form {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .review-form input,
+    .review-form textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 10px;
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      padding: 10px 12px;
+      font: inherit;
+    }
+
+    .review-form textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .review-form input::placeholder,
+    .review-form textarea::placeholder {
+      color: rgba(255,255,255,.7);
+    }
+
+    .review-submit {
+      justify-self: start;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 16px;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(90deg, var(--acc), var(--acc2));
+      cursor: pointer;
+    }
+
     footer { text-align: center; padding: 40px 0 20px; color: var(--muted); }
   </style>
 </head>
@@ -210,9 +255,9 @@
     </nav>
 
     <header>
-      <div class="meetup-title">Bioinformatics Community Meetup #5</div>
-      <div class="meetup-date">11 July 2026</div>
-      <div class="meetup-location">Kraków Miastem Startupów, Zabłocie 20.22</div>
+      <div id="banner-title" class="meetup-title">Bioinformatics Community Meetup #5</div>
+      <div id="banner-date" class="meetup-date">11 July 2026</div>
+      <div id="banner-location" class="meetup-location">Kraków Miastem Startupów, Zabłocie 20.22</div>
       <p class="sub">Where Computational Life Science Meets People</p>
       <div class="cta" style="cursor:default;">Registration to be announced</div>
       <div class="muted" style="margin-top:8px;">Registration not open yet - stay tuned 😉• Limited seats</div>
@@ -225,6 +270,28 @@
         <div class="card">
           <p><strong>Bioinformatics Community Meetup #5</strong> takes place on <strong>11 July 2026</strong> at <strong>Kraków Miastem Startupów, Zabłocie 20.22</strong>.</p>
           <p class="muted" style="margin-bottom:0;">The full program and speaker lineup will be published soon. Check back here for updates.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>✨ Highlights</h2>
+        <div class="card">
+          <ul class="highlight-list">
+            <li>Keynotes from invited leaders in bioinformatics and computational biology.</li>
+            <li>Networking moments connecting academia, startups, and industry teams.</li>
+            <li>Dedicated highlight recap after the meetup with participant insights.</li>
+          </ul>
+
+          <h3 style="margin:18px 0 8px;">Collect reviews from key participants</h3>
+          <p class="muted" style="margin:0;">We are gathering short testimonials from speakers, sponsors, and community leaders.</p>
+
+          <form class="review-form" action="mailto:bioinformatics.community.pl@gmail.com?subject=Meetup%20%235%20review" method="post" enctype="text/plain">
+            <input type="text" name="name" placeholder="Full name" required />
+            <input type="text" name="organization" placeholder="Organization" required />
+            <input type="text" name="role" placeholder="Role (e.g. Speaker, Sponsor, Partner)" required />
+            <textarea name="review" placeholder="Share your review (2–4 sentences)" required></textarea>
+            <button class="review-submit" type="submit">Send review</button>
+          </form>
         </div>
       </section>
     </div>
@@ -420,6 +487,29 @@
       meetup5: document.getElementById('tab-meetup5'),
       meetup4: document.getElementById('tab-meetup4')
     };
+    const bannerTitle = document.getElementById('banner-title');
+    const bannerDate = document.getElementById('banner-date');
+    const bannerLocation = document.getElementById('banner-location');
+
+    const bannerContent = {
+      meetup5: {
+        title: 'Bioinformatics Community Meetup #5',
+        date: '11 July 2026',
+        location: 'Kraków Miastem Startupów, Zabłocie 20.22'
+      },
+      meetup4: {
+        title: 'Bioinformatics Community Meetup #4',
+        date: '22 November 2025',
+        location: 'AGH Faculty of Computer Science (D-17), ul. Kawiory 21, room 1.20'
+      }
+    };
+
+    function updateBanner(tabName) {
+      const selectedBanner = bannerContent[tabName] || bannerContent.meetup5;
+      bannerTitle.textContent = selectedBanner.title;
+      bannerDate.textContent = selectedBanner.date;
+      bannerLocation.textContent = selectedBanner.location;
+    }
 
     function activateTab(tabName, updateHash = false) {
       const normalizedTab = tabContents[tabName] ? tabName : 'meetup5';
@@ -433,6 +523,8 @@
       Object.entries(tabContents).forEach(([name, tabElement]) => {
         tabElement.classList.toggle('active', name === normalizedTab);
       });
+
+      updateBanner(normalizedTab);
 
       if (updateHash && window.location.hash !== `#${normalizedTab}`) {
         window.location.hash = normalizedTab;
