@@ -219,6 +219,40 @@
       background: #0b1220;
     }
 
+    .callout-card {
+      background: linear-gradient(135deg, rgba(130,0,255,0.2), rgba(166,246,143,0.14));
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 16px;
+      padding: 24px;
+    }
+
+    .callout-deadline {
+      display: inline-block;
+      margin: 10px 0 14px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.2);
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .callout-button {
+      display: inline-block;
+      margin-top: 8px;
+      background: linear-gradient(90deg, var(--acc), var(--acc2));
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .callout-button:hover {
+      text-decoration: none;
+      filter: brightness(1.06);
+    }
+
     footer { text-align: center; padding: 40px 0 20px; color: var(--muted); }
   </style>
 </head>
@@ -246,6 +280,16 @@
         <div class="card">
           <p><strong>Bioinformatics Community Meetup #5</strong> takes place on <strong>11 July 2026</strong> at <strong>Kraków Miastem Startupów, Zabłocie 20.22</strong>.</p>
           <p class="muted" style="margin-bottom:0;">The full program and speaker lineup will be published soon. Check back here for updates.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>📣 Call For Speakers Opened!</h2>
+        <div class="callout-card">
+          <p style="margin-top:0;"><strong>Want to share your work with the life science community across academia and industry?</strong> We are looking for speakers for a <strong>20-minute talk</strong> on bioinformatics, computational biology, data science in medicine, or professional topics from academia/industry practice.</p>
+          <p class="callout-deadline">Speaker registration closes on May 1st, 2026 (EOD)</p>
+          <p class="muted" style="margin-bottom:10px;">If there is something you really want to talk about, don’t wait.</p>
+          <a class="callout-button" href="https://docs.google.com/forms/d/e/1FAIpQLSeKTP5nbpk_7bWdFEIPDqWzSjQXp_w2R_HVYZd5wWUXhVfUDQ/viewform" target="_blank" rel="noopener">Apply as a Speaker</a>
         </div>
       </section>
     </div>
