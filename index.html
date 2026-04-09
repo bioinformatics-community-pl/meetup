@@ -66,21 +66,6 @@
     .meetup-location { font-size: 1.2rem; color: #fff; font-weight: 500; }
     .sub { color: #ffffff; font-size: 1.3rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; margin-top: 28px; }
 
-    .cta {
-      margin-top: 40px;
-      display: inline-block;
-      background: linear-gradient(90deg, var(--acc), var(--acc2));
-      color: #fff;
-      padding: 16px 32px;
-      border-radius: 16px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      transition: transform 0.2s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 20px rgba(130,0,255,0.4), 0 0 25px rgba(166,246,143,0.3);
-      text-decoration: none;
-    }
-    .cta:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(130,0,255,0.6), 0 0 40px rgba(166,246,143,0.5); }
-
     section {
       background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,255,255,.08);
@@ -253,6 +238,18 @@
       filter: brightness(1.06);
     }
 
+    .callout-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    @media (max-width: 820px) {
+      .callout-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     footer { text-align: center; padding: 40px 0 20px; color: var(--muted); }
   </style>
 </head>
@@ -269,8 +266,6 @@
       <div id="banner-date" class="meetup-date">11 July 2026</div>
       <div id="banner-location" class="meetup-location">Kraków Miastem Startupów, Zabłocie 20.22</div>
       <p class="sub">Where Computational Life Science Meets People</p>
-      <div class="cta" style="cursor:default;">Registration to be announced</div>
-      <div class="muted" style="margin-top:8px;">Registration not open yet - stay tuned 😉• Limited seats</div>
      
     </header>
 
@@ -284,12 +279,19 @@
       </section>
 
       <section>
-        <h2>📣 Call For Speakers Opened!</h2>
-        <div class="callout-card">
+        <div class="callout-grid">
+          <div class="callout-card">
+            <h2>📣 Call For Speakers Opened!</h2>
           <p style="margin-top:0;"><strong>Want to share your work with the life science community across academia and industry?</strong> We are looking for speakers for a <strong>20-minute talk</strong> on bioinformatics, computational biology, data science in medicine, or professional topics from academia/industry practice.</p>
           <p class="callout-deadline">Speaker registration closes on May 1st, 2026 (EOD)</p>
           <p class="muted" style="margin-bottom:10px;">If there is something you really want to talk about, don’t wait.</p>
           <a class="callout-button" href="https://docs.google.com/forms/d/e/1FAIpQLSeKTP5nbpk_7bWdFEIPDqWzSjQXp_w2R_HVYZd5wWUXhVfUDQ/viewform" target="_blank" rel="noopener">Apply as a Speaker</a>
+          </div>
+          <div class="callout-card">
+            <h2>📝 Participant Registration Form</h2>
+          <p style="margin-top:0;"><strong>Attendee registration for Meetup #5 is now open.</strong> Reserve your spot and join the community in Krakow on July 11th, 2026.</p>
+          <a class="callout-button" href="https://forms.gle/MpWaiKyiUPibS8R98" target="_blank" rel="noopener">Register as a Participant</a>
+          </div>
         </div>
       </section>
     </div>
